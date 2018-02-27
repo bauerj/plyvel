@@ -30,7 +30,6 @@ from cpython.buffer cimport (
     PyBUF_SIMPLE,
 )
 
-from libc.stdint cimport uint64_t
 from libc.stdlib cimport malloc, free
 from libc.string cimport const_char
 from libcpp.string cimport string
@@ -427,7 +426,7 @@ cdef class DB:
 
         cdef int n_ranges = len(ranges)
         cdef Range *c_ranges = <Range *>malloc(n_ranges * sizeof(Range))
-        cdef uint64_t *sizes = <uint64_t *>malloc(n_ranges * sizeof(uint64_t))
+        cdef unsigned long long *sizes = <unsigned long long *>malloc(n_ranges * sizeof(unsigned long long))
         try:
             for i in xrange(n_ranges):
                 start, stop = ranges[i]
